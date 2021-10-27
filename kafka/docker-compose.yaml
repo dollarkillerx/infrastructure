@@ -8,7 +8,7 @@ services:
     ports:
       - 2182:2181
 
-  kafka9094:
+  kafka1:
     restart: always
     image: wurstmeister/kafka:latest
     ports:
@@ -23,3 +23,16 @@ services:
       - ./kafka-logs:/kafka
     depends_on:
       - zookeeper
+
+  kowl:
+    image: quay.io/cloudhut/kowl:v1.1.0
+    restart: on-failure
+    container_name: kowl
+    hostname: kowl
+    volumes:
+      - ./configs/kowl_config.yaml:/etc/kowl/config.yaml
+    ports:
+      - "9009:8080"
+    entrypoint: ./kowl --config.filepath=/etc/kowl/config.yaml
+    depends_on:
+      - kafka1
