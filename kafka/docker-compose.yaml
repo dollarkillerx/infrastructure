@@ -36,3 +36,28 @@ services:
     entrypoint: ./kowl --config.filepath=/etc/kowl/config.yaml
     depends_on:
       - kafka1
+
+#  kafka-manager:
+#    image: sheepkiller/kafka-manager:latest
+#    restart: always
+#    container_name: kafka-manager
+#    hostname: kafka-manager
+#    ports:
+#      - "9006:9000"
+#    links:            # 连接本compose文件创建的container
+#      - kafka1
+#      - kafka2
+#      - kafka3
+#    external_links:   # 连接本compose文件以外的container
+#      - zoo1
+#      - zoo2
+#      - zoo3
+#    environment:
+#      ZK_HOSTS: zoo1:2181,zoo2:2180,zoo3:2179
+#      KAFKA_BROKERS: kafka1:9082,kafka2:9083,kafka3:9084
+#      APPLICATION_SECRET: letmein
+#      KM_ARGS: -Djava.net.preferIPv4Stack=true
+#    depends_on:
+#      - kafka1
+#      - kafka2
+#      - kafka3
