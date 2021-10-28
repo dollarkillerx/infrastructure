@@ -1,0 +1,67 @@
+version: "3.8"
+networks:
+  etcd:
+services:
+  node1:
+    image: quay.io/coreos/etcd:v3.4.14
+    ports:
+      - "12379:2379"
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - /data/docker/etcd/node1/data:/var/etcd
+    command: >
+      /usr/local/bin/etcd
+      --name node1
+      --data-dir /var/etcd
+      --listen-client-urls http://0.0.0.0:2379
+      --advertise-client-urls http://0.0.0.0:2379
+      --listen-peer-urls http://0.0.0.0:2380
+      --initial-advertise-peer-urls http://node1:2380
+      --initial-cluster node1=http://node1:2380,node2=http://node2:2380,node3=http://node3:2380
+      --initial-cluster-token etcd-token
+      --initial-cluster-state new
+      --log-level info
+    networks:
+      - etcd
+  node2:
+    image: quay.io/coreos/etcd:v3.4.14
+    ports:
+      - "22379:2379"
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - /data/docker/etcd/node2/data:/var/etcd
+    command: >
+      /usr/local/bin/etcd
+      --name node2
+      --data-dir /var/etcd
+      --listen-client-urls http://0.0.0.0:2379
+      --advertise-client-urls http://0.0.0.0:2379
+      --listen-peer-urls http://0.0.0.0:2380
+      --initial-advertise-peer-urls http://node2:2380
+      --initial-cluster node1=http://node1:2380,node2=http://node2:2380,node3=http://node3:2380
+      --initial-cluster-token etcd-token
+      --initial-cluster-state new
+      --log-level info
+    networks:
+      - etcd
+  node3:
+    image: quay.io/coreos/etcd:v3.4.14
+    ports:
+      - "32379:2379"
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - /data/docker/etcd/node3/data:/var/etcd
+    command: >
+      /usr/local/bin/etcd
+      --name node3
+      --data-dir /var/etcd
+      --listen-client-urls http://0.0.0.0:2379
+      --advertise-client-urls http://0.0.0.0:2379
+      --listen-peer-urls http://0.0.0.0:2380
+      --initial-advertise-peer-urls http://node3:2380
+      --initial-cluster node1=http://node1:2380,node2=http://node2:2380,node3=http://node3:2380
+      --initial-cluster-token etcd-token
+      --initial-cluster-state new
+      --log-level info
+    networks:
+      - etcd
