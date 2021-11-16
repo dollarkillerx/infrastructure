@@ -37,6 +37,27 @@ services:
     depends_on:
       - kafka1
 
+
+  kafka-manager:
+    image: sheepkiller/kafka-manager:latest
+    restart: always
+    container_name: kafka-manager
+    hostname: kafka-manager
+    ports:
+      - "9006:9000"
+    links:            # 连接本compose文件创建的container
+      - kafka1
+    external_links:   # 连接本compose文件以外的container
+      - zookeeper
+    environment:
+      ZK_HOSTS: zookeeper:2181
+      KAFKA_BROKERS: kafka1:9092
+      APPLICATION_SECRET: letmein
+      KM_ARGS: -Djava.net.preferIPv4Stack=true
+    depends_on:
+      - kafka1
+      
+
 #  kafka-manager:
 #    image: sheepkiller/kafka-manager:latest
 #    restart: always
