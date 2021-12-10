@@ -5,10 +5,10 @@ services:
     restart: always
     environment:
       MEILI_MASTER_KEY: root                     # 密钥
-      MEILI_MAX_INDEX_SIZE: 1073741824000        # 最大索引大小 1T
-      MEILI_MAX_UDB_SIZE: 1073741824000          # 最大数据库大小 1T
+      MEILI_MAX_INDEX_SIZE: 707374182400        # 最大索引大小 700G
+      MEILI_MAX_UDB_SIZE: 707374182400          # 最大数据库大小 700G
       MEILI_HTTP_PAYLOAD_SIZE_LIMIT: 1048576000  # 最大请求大小 1G
     ports:
       - "7700:7700"
     volumes:
-      - ./data.ms:/data.ms
+      - /ssd/creeper/data.ms:/home/meili/data.ms  # 请给 当前目录777权限
