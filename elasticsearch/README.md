@@ -11,6 +11,6 @@ https://www.elastic.co/guide/en/elasticsearch/reference/7.14/configuring-tls-doc
 需要先启动 create-certs.yml
 `docker-compose -f create-certs.yml run --rm create_certs`
 
-再启动ea
+再启动es
 
 `docker-copose up- d`
