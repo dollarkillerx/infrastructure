@@ -1,0 +1,12 @@
+version: '3'
+services:
+  vaultwarden:
+    image: vaultwarden/server:1.27.0-alpine
+    container_name: 'vaultwarden'
+    environment:
+     - SIGNUPS_ALLOWED=false
+    volumes:
+     - /opt/bitwarden/bw-data/:/data/
+    restart: always
+    ports:
+      - 8471:8471
