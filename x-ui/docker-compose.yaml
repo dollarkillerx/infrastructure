@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  xui:
+    container_name: "xui"
+    image: enwaiax/x-ui:latest
+    restart: always
+    network_mode: host
+    volumes:
+      - $PWD/db/:/etc/x-ui/
+      - $PWD/cert/:/root/cert/
