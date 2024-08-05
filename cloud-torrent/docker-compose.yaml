@@ -1,0 +1,10 @@
+services:
+  cloud-torrent:
+    image: jpillora/cloud-torrent
+    container_name: ct
+    ports:
+      - "63000:63000"
+    restart: always
+    volumes:
+      - /root/downloads:/downloads
+    command: --port 63000
