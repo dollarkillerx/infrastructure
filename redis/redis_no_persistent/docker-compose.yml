@@ -3,7 +3,7 @@ version: '3'
 services:
   redis_no_persistent:
     container_name: "redis_no_persistent"
-    image: redis:6-alpine
+    image: redis:8.2.1-alpine
     restart: always
     command: redis-server --requirepass yourpassword
     ports:
