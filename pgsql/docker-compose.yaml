@@ -4,9 +4,10 @@ services:
     container_name: postgres
     restart: always
     environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: root
+      POSTGRES_USER: root                # 用户名
+      POSTGRES_PASSWORD: root            # 密码
+      POSTGRES_DB: myapp                 # 初始化数据库名
     ports:
-      - 5432:5432
-#    volumes:
-#      - /data/compose/postgresql/data:/var/lib/postgresql/data
+      - "5432:5432"
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data   # 本地持久化存储
