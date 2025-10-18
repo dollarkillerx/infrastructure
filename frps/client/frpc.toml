@@ -1,0 +1,13 @@
+serverAddr = "{{ .Envs.FRP_SERVER_ADDR }}"
+serverPort = 7000
+
+[auth]
+# method = "token"  # token 为默认，可省略
+token = "{{ .Envs.FRP_TOKEN }}"
+
+[[proxies]]
+name = "ssh"
+type = "tcp"
+localIP = "127.0.0.1"
+localPort = 22
+remotePort = 6000

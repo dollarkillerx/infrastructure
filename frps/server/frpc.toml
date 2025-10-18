@@ -1,0 +1,12 @@
+# 监听端口
+bindPort = 7000
+# 认证：token（默认 method 就是 token，可省略）
+[auth]
+token = "Z4u9QWFRcW"
+
+# 可选：Dashboard（Web 界面）
+[webServer]
+addr = "0.0.0.0"
+port = 7500
+user = "pacman"
+password = "Z4u9QWFRcW"
