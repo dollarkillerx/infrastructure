@@ -1,24 +1,34 @@
-version: '3.1'
-
 services:
-
-  mongo:
-    image: mongo:latest
-    restart: always
+  mongodb:
+    image: mongodb/mongodb-community-server:8.0-ubi8
+    container_name: mongodb
+    restart: unless-stopped
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: root
-    ports:
-      - 27017:27017
+      MONGODB_INITDB_ROOT_USERNAME: root
+      MONGODB_INITDB_ROOT_PASSWORD: rP5P7WvYBQX3gx9eF0UL
     volumes:
-      - ./data:/data/db
+      - mongo_data:/data/db
+      - mongo_config:/data/configdb
+    command:
+      - mongod
+      - --bind_ip_all
+    ports:
+      - "38017:27017"
 
-#  mongo-express:
-#    image: mongo-express:1.0.0-alpha
-#    restart: always
-#    ports:
-#      - 8081:8081
-#    environment:
-#      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-#      ME_CONFIG_MONGODB_ADMINPASSWORD: root
-#      ME_CONFIG_MONGODB_URL: mongodb://root:root@mongo:27017/
+  mongo-express:
+    image: mongo-express:1.0.2-20-alpine3.19
+    container_name: mongo-express
+    restart: unless-stopped
+    ports:
+      - "8581:8081"
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongodb
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: rP5P7WvYBQX3gx9eF0UL
+      ME_CONFIG_BASICAUTH: "false"
+    depends_on:
+      - mongodb
+
+volumes:
+  mongo_data:
+  mongo_config:
